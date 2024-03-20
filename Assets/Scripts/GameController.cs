@@ -94,8 +94,6 @@ public class GameController : MonoBehaviour
         InputFieldObj.text = "";
         InputFieldObj.caretBlinkRate = 1000;
 
-        //ObjectPoolRef.GeneratePoolObject();
-
         InvokeRepeating("SpawnObject", spawnTime, spawnDelay);
     }
 
@@ -256,8 +254,6 @@ public class GameController : MonoBehaviour
 
     public void IncNumberOfDropsWin()
     {
-        //Debug.Log("NUMBER OF DROPS WIN");
-
         NumberOfDropsWin += 1;
         if (CurrentLevel == 1)
         {
@@ -396,6 +392,7 @@ public class GameController : MonoBehaviour
         stopSpawing = true;
         isPlaying = false;
         isPaused = true;
+        SavePlayerData();
         SceneManager.LoadScene("MainMenu");
     }
     public void GameOverGameExitButton()
@@ -404,6 +401,7 @@ public class GameController : MonoBehaviour
         stopSpawing = true;
         isPlaying = false;
         isPaused = true;
+        SavePlayerData();
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -456,7 +454,8 @@ public class GameController : MonoBehaviour
         CurrentLevel = 1;
         DropVelocityByLevel = 0.2f;
         stopSpawing = true;
-        SavePlayerData();
+        if (CurrentScore > mPlayerData.HighScore) { mPlayerData.HighScore = CurrentScore; }
+        if (CurrentLevel > mPlayerData.HighLevel) { mPlayerData.HighLevel = CurrentLevel; }
         UIController.ShowGameOver();
     }
 
