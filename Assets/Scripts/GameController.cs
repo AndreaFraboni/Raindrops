@@ -407,12 +407,11 @@ public class GameController : MonoBehaviour
 
     public void ReStartGameOverBUtton()
     {
+        UIController.HideGameOver();
         stopSpawing = false;
         isPaused = false;
         Time.timeScale = 1;
         InputFieldObj.ActivateInputField();
-        isPlaying = true;
-        UIController.HideGameOver();
         UIController.UpdateLives(Lives);
         UIController.UpdateScoreText(Score);
         UIController.UpdateCurrentLevelText(CurrentLevel);
